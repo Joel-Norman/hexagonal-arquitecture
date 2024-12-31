@@ -17,12 +17,7 @@ pipeline{
         }
         stage('Deploy to EC2') {
             steps {
-                sshagent(['f625a1cf-ac6e-4e49-a7d6-2db12ec65e07']) {
-                    sh """
-                        ssh -o StrictHostKeyChecking=no admin@ec2-34-228-113-27.compute-1.amazonaws.com "echo 'Conectado desde Jenkins'"
-                    """
-                }
-
+                echo SSH_KEY
             }
         }
     }
