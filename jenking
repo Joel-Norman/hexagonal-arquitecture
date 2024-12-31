@@ -17,9 +17,9 @@ pipeline{
         }
         stage('Deploy to EC2') {
             steps {
-                sh "chmod 400 'hexagonal.pem'"
+                sh "chmod 400 './hexagonal.pem'"
                 sh """
-                        ssh -i 'hexagonal.pem' admin@ec2-34-228-113-27.compute-1.amazonaws.com "echo 'Conectado desde Jenkins'"
+                        ssh -i './hexagonal.pem' admin@ec2-34-228-113-27.compute-1.amazonaws.com "echo 'Conectado desde Jenkins'"
                     """
 
             }
