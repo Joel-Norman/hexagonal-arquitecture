@@ -1,0 +1,15 @@
+pepiline{
+    agent any
+    stages{
+        stage("paso 1"){
+            script{
+                sh "echo 'hola mundo'"
+            }
+        }
+        stage("paso 2"){
+            script{
+                sh "echo 'hola mundo 2'"
+            }
+        }
+    }
+}
