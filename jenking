@@ -1,5 +1,9 @@
 pipeline{
     agent any
+    environment {
+        AWS_CREDENTIALS = credentials('aws-credentials')
+        SSH_KEY = credentials('ec2-ssh-key')
+    }
     stages{
         stage("paso 1"){
             steps{
@@ -10,6 +14,15 @@ pipeline{
         stage("paso 2"){
             steps{
                 echo 'Hello World 1'
+            }
+        }
+        stage('Deploy to EC2') {
+            steps {
+                sshagent(['ec2-ssh-key']) {
+                    sh '''
+                    ssh admin@ec2-34-228-113-27.compute-1.amazonaws.com "echo 'Conectado desde Jenkins'"
+                    '''
+                }
             }
         }
     }
