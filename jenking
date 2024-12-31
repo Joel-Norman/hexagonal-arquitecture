@@ -18,9 +18,21 @@ pipeline{
         stage('Deploy to EC2') {
             steps {
                 script {
+                    // Guardar la clave SSH temporalmente en un archivo
+                    def privateKeyFile = "${env.WORKSPACE}/ec2_key.pem"
+                    writeFile file: privateKeyFile, text: SSH_KEY
+
+                    // Establecer los permisos de la clave para que SSH lo acepte
+                    sh "chmod 400 ${privateKeyFile}"
+
+                    // Conectarse a la instancia EC2 usando SSH
                     sh """
-                        ssh admin@ec2-34-228-113-27.compute-1.amazonaws.com "echo 'Conectado desde Jenkins'"
+                        ssh  -i ${privateKeyFile} admin@ec2-34-228-113-27.compute-1.amazonaws.com "echo 'Conectado desde Jenkins'"
                     """
+
+                    // Limpiar el archivo de clave después de usarlo
+                    sh "rm -f ${privateKeyFile}"
+                    
                 }
             }
         }
