@@ -3,6 +3,12 @@ pipeline{
     stages{
         stage("paso 1"){
             steps{
+                sh 'git --version'
+            }
+            
+        }
+        stage("paso 1"){
+            steps{
                 mkdir carpeta_jenkings
             }
             
