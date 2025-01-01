@@ -1,0 +1,16 @@
+pipeline{
+    agent {label 'ec2slave'}
+    stages{
+        stage("paso 1"){
+            steps{
+                mkdir carpeta_jenkings
+            }
+            
+        }
+        stage("paso 2"){
+            steps{
+                mkdir carpeta_jenkings2
+            }
+        }
+    }
+}
