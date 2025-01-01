@@ -1,7 +1,7 @@
 pipeline{
     agent {label 'ec2slave'}
     stages{
-        stage("paso 1"){
+        stage("paso 0"){
             steps{
                 sh 'git --version'
             }
