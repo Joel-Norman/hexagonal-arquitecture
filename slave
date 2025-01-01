@@ -9,13 +9,13 @@ pipeline{
         }
         stage("paso 1"){
             steps{
-                mkdir carpeta_jenkings
+                sh 'mkdir carpeta_jenkings'
             }
             
         }
         stage("paso 2"){
             steps{
-                mkdir carpeta_jenkings2
+                sh 'mkdir carpeta_jenkings2'
             }
         }
     }
