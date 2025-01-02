@@ -17,7 +17,7 @@ pipeline{
             steps{
                 script {
                     // Eliminar la imagen si ya existe
-                    sh 'sudo docker images -q api-product && docker rmi -f api-product || echo "Imagen no existe, creando nueva."'
+                    sh 'sudo docker images -q api-product && sudo docker rmi -f api-product || echo "Imagen no existe, creando nueva."'
                     
                     // Crear la imagen Docker
                     sh 'sudo docker build -t api-product .'
