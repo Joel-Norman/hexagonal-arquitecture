@@ -17,17 +17,17 @@ pipeline{
             steps{
                 script {
                     // Eliminar la imagen si ya existe
-                    sh 'docker images -q api-product && docker rmi -f api-product || echo "Imagen no existe, creando nueva."'
+                    sh 'sudo docker images -q api-product && docker rmi -f api-product || echo "Imagen no existe, creando nueva."'
                     
                     // Crear la imagen Docker
-                    sh 'docker build -t api-product .'
+                    sh 'sudo docker build -t api-product .'
                 }
             }
             
         }
         stage("Execute Image Docker"){
             steps{
-                sh 'docker run -d -p 8081:8081 api-product'
+                sh 'sudo docker run -d -p 8081:8081 api-product'
             }
             
         }
