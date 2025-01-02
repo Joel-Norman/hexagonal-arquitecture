@@ -1,22 +1,18 @@
 pipeline{
     agent {label 'ec2slave'}
     stages{
-        stage("paso 0"){
+        stage("Build"){
             steps{
-                sh 'git --version'
+                sh 'mvn clean package'
             }
             
         }
-        stage("paso 1"){
+        stage("view artifact"){
             steps{
-                sh 'mkdir carpeta_jenkings'
+                sh 'ls ./target'
             }
             
         }
-        stage("paso 2"){
-            steps{
-                sh 'mkdir carpeta_jenkings2'
-            }
-        }
+        
     }
 }
