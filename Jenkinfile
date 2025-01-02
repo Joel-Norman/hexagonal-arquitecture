@@ -1,0 +1,35 @@
+pipeline{
+    agent {label 'ec2slave'}
+    stages{
+        stage("Build"){
+            steps{
+                sh 'mvn clean package -DskipTests'
+            }
+            
+        }
+        stage("View artifact"){
+            steps{
+                sh 'ls ./target'
+            }
+            
+        }
+        stage("Create Image Docker"){
+            steps{
+                script {
+                    // Eliminar la imagen si ya existe
+                    sh 'docker images -q api-product && docker rmi -f api-product || echo "Imagen no existe, creando nueva."'
+                    
+                    // Crear la imagen Docker
+                    sh 'docker build -t api-product .'
+                }
+            }
+            
+        }
+        stage("Execute Image Docker"){
+            steps{
+                sh 'docker run -d -p 8081:8081 api-product'
+            }
+            
+        }
+    }
+}
